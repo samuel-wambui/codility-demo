@@ -1,15 +1,36 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        int nums[] = {1,4, 3,2,5,9};
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        Main main = new Main();
+        int result = main.smallestPositiveUnOccurring(nums);
+        System.out.println("The smallest positive integer missing in the array is: " + result);
+    }
+
+    public int smallestPositiveUnOccurring(int[] nums) {
+        Stream<Integer> integerStream = Arrays.stream(nums).boxed();
+        Set<Integer> sortedSet = integerStream.sorted().collect(Collectors.toCollection(LinkedHashSet::new));
+
+        sortedSet.forEach(n -> System.out.print(n + " "));
+        System.out.println();
+
+        int x = 1;
+        while (sortedSet.contains(x)) {
+            x++;
         }
+        return x;
     }
 }
+//
